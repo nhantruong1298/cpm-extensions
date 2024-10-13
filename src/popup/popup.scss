@@ -1,0 +1,41 @@
+body {
+  width: 170px;
+  // height: 100px;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  // margin: 16px 0;
+
+  .sign-in-label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .sign-in-btn {
+    width: 100px;
+    height: 24px;
+    margin-bottom: 16px;
+  }
+}
+
+.common-case-container {
+  display: flex;
+  flex-direction: column;
+  .common-label {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .check-code-btn {
+    margin-bottom: 20px;
+  }
+}
