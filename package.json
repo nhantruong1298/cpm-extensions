@@ -1,11 +1,12 @@
 {
   "name": "cpm-extension",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "popup.js",
   "license": "MIT",
   "scripts": {
     "dev": "webpack",
-    "watch": "webpack --watch --progress --config webpack.config.js"
+    "watch": "webpack --watch --progress --config webpack.config.js",
+    "build": "webpack --mode production --progress --config webpack.config.js"
   },
   "dependencies": {
     "global": "^4.4.0",

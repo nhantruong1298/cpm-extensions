@@ -1,11 +1,8 @@
-body {
-  width: 170px;
-  // height: 100px;
-}
-
 .popup-container {
   display: flex;
   flex-direction: column;
+  width: 180px;
+  margin: 10px;
 }
 
 .sign-in-container {
@@ -16,13 +13,35 @@ body {
   .sign-in-label {
     margin-bottom: 8px;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 800;
+    color: white;
   }
 
   .sign-in-btn {
-    width: 100px;
-    height: 24px;
+    width: 180px;
+    height: 30px;
     margin-bottom: 16px;
+    background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+    border: none;
+    color: rgb(58, 58, 58);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    background-image: url("../images/button_bg.png");
+    background-size: cover;
+    font-weight: 700;
+    &:hover {
+      background-color: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+      transform: scale(1.05);
+    }
+
+    &:active {
+      background-color: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+      transform: scale(0.95);
+    }
   }
 }
 
@@ -33,9 +52,41 @@ body {
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 8px;
+    color: white;
   }
 
   .check-code-btn {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    width: 180px;
+    height: 30px;
+    border: none;
+    color: rgb(58, 58, 58);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: 600;
+    cursor: pointer;
+    background-image: url("../images/button_bg.png");
+    background-size: cover;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
+}
+
+.premium-label {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: white;
+  text-align: right;
 }

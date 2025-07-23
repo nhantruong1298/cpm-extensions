@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "CPM extensions",
+  "name": "Tool click",
   "description": "extension hỗ trợ click nhanh",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "permissions": ["scripting", "activeTab"],
 
   "background": {

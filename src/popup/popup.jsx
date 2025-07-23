@@ -1,80 +1,56 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./popup.scss";
-
-//* Get TabId
-async function getCurrentTab() {
-  let queryOptions = { active: true, lastFocusedWindow: true };
-  let [tab] = await chrome.tabs.query(queryOptions);
-  return tab;
-}
-
-//*Check QC code
-function checkQcCode(value) {
-  const query = `input[name="codes[${value}]"]`;
-  const checkbox = document.querySelector(query);
-
-  if (checkbox !== null) {
-    if (!checkbox.checked) {
-      checkbox.click();
-    }
-  } else {
-    alert("Hông tìm thấy QC code !!");
-  }
-}
-
-function saveQcCode() {
-  const saveButton = document.querySelector(".col-sm-5.col-xs-12 button");
-
-  if ((saveButton !== null && `${saveButton.type}`) === "button") {
-    saveButton.click();
-  } else {
-    alert("Hông tìm thấy nút lưu QC code !!");
-  }
-}
-
-//*Xác nhận đã kí
-function clickSignButton() {
-  const signButton = document.getElementById("xbutton-confirm");
-
-  if (signButton !== null) {
-    signButton.click();
-  }
-}
-
-//*Delay
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import scrollTo from "../actions/scroll_to";
+import clickSignButton from "../actions/click_sign_button";
+import checkQcCode from "../actions/check_qc_code";
+import clickSaveButton from "../actions/click_save_button";
 
 const Popup = () => {
-  const handleSignIn = async () => {
+  //* Get TabId
+  async function getCurrentTab() {
+    let queryOptions = { active: true, lastFocusedWindow: true };
+    let [tab] = await chrome.tabs.query(queryOptions);
+    return tab;
+  }
+
+  //*Delay
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  //* Scroll to Plan QC
+  async function handleScrollTo(id) {
     const tab = await getCurrentTab();
 
+    const cardHeader = document.getElementById(id);
+
+    console.log("scrollTo", id, cardHeader);
+
     chrome.scripting.executeScript({
-      target: { tabId: tab.id, allFrames: true },
-      files: ["sign-in.js"],
+      target: { tabId: tab.id },
+      func: scrollTo,
+      args: [id],
     });
-  };
+  }
 
   //*Check code + ký tên
-  const handleCheckCodeAndSign = async (code) => {
+  const handleCheckCodeAndSign = async (value) => {
     const tab = await getCurrentTab();
 
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: checkQcCode,
-      args: [code],
+      args: [value],
     });
 
-    await delay(100);
+    await delay(50);
 
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: saveQcCode,
-    });
+    handleClickSignButton();
+  };
 
-    await delay(100);
+  const handleClickSignButton = async () => {
+    const tab = await getCurrentTab();
 
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
@@ -82,52 +58,60 @@ const Popup = () => {
     });
   };
 
-  //*Check code
-  const handleCheckCode = async (code) => {
+  //* Nhấn nút lưu
+  const handleClickSaveButton = async () => {
     const tab = await getCurrentTab();
 
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      func: checkQcCode,
-      args: [code],
-    });
-
-    await delay(100);
-
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: saveQcCode,
+      func: clickSaveButton,
     });
   };
 
   return (
     <div className="popup-container">
-      <div className="sign-in-container">
-        <span className="sign-in-label">Đăng nhập:</span>
-        <button className="sign-in-btn" onClick={handleSignIn}>
-          HCM03723
-        </button>
-      </div>
       <div className="common-case-container">
-        <span className="common-label">TH thông dụng:</span>
+        <span className="common-label">Dự án DC</span>
         <button
           className="check-code-btn"
-          onClick={() => handleCheckCodeAndSign("125")}
+          style={{ marginBottom: "48px" }}
+          onClick={async () => {
+            await handleClickSignButton();
+            await handleScrollTo("plan_confirm");
+          }}
         >
-          Code 8.1(Đạt) + Ký tên
-        </button>
-        <button
-          className="check-code-btn"
-          onClick={() => handleCheckCode("131")}
-        >
-          code 8.4(call check TC)
+          Ký
         </button>
 
         <button
           className="check-code-btn"
-          onClick={() => handleCheckCode("132")}
+          onClick={async () => {
+            await handleCheckCodeAndSign("1.1");
+            await handleScrollTo("plan_confirm");
+          }}
         >
-          code 8.5(call check KTC)
+          1.1 + ký
+        </button>
+        <button
+          className="check-code-btn"
+          onClick={async () => {
+            await handleCheckCodeAndSign("1.2");
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          1.2 + ký
+        </button>
+
+        <button
+          className="check-code-btn"
+          onClick={async () => {
+            await handleCheckCodeAndSign("6.3");
+            await handleClickSaveButton();
+            await handleClickSaveButton();
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          6.3 + ký + lưu
         </button>
       </div>
     </div>

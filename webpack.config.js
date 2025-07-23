@@ -38,6 +38,12 @@ module.exports = {
           to: path.resolve("dist"),
         },
         { from: path.resolve("./src/popup.html"), to: path.resolve("dist") },
+        // { from: path.resolve("./src/actions/fill_note.jsx"), to: path.resolve("dist") },
+        // { from: path.resolve("./src/actions/scroll_to_plan.jsx"), to: path.resolve("dist") },
+        {
+          from: path.resolve("./src/actions/*"), // The crucial change
+          to: path.resolve("dist/actions"), // Important: create an actions folder in dist
+        },
       ],
     }),
     // new HtmlWebpackPlugin({
@@ -50,7 +56,7 @@ module.exports = {
     extensions: [
       // ".tsx", ".ts",
       ".js",
-      "jsx",
+      ".jsx",
     ],
   },
   output: {

@@ -3,3 +3,7 @@ dist
 
 
 sign-in.js
+dist.pem
+*.zip
+
+.DS_store
