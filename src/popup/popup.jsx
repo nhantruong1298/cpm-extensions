@@ -90,8 +90,9 @@ const Popup = () => {
             await handleScrollTo("plan_confirm");
           }}
         >
-          1.1 + ký
+          1.1 (K Selfie)
         </button>
+
         <button
           className="check-code-btn"
           onClick={async () => {
@@ -99,10 +100,50 @@ const Popup = () => {
             await handleScrollTo("plan_confirm");
           }}
         >
-          1.2 + ký
+          1.2 (K đeo thẻ)
         </button>
 
         <button
+          className="check-code-btn"
+          onClick={async () => {
+            await handleCheckCodeAndSign("2.1");
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          2.1 (Overview sai)
+        </button>
+
+        <button
+          className="check-code-btn"
+          onClick={async () => {
+            await handleCheckCodeAndSign("2.8");
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          2.8 (K hình trước lắp đặt)
+        </button>
+
+        <button
+          className="check-code-btn"
+          onClick={async () => {
+            await handleCheckCodeAndSign("4.2");
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          4.2 (Sai địa chỉ)
+        </button>
+
+        <button
+          className="check-code-btn"
+          onClick={async () => {
+            await handleCheckCodeAndSign("4.3");
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          4.3 (Sai POSM)
+        </button>
+
+        {/* <button
           className="check-code-btn"
           onClick={async () => {
             await handleCheckCodeAndSign("6.3");
@@ -112,7 +153,7 @@ const Popup = () => {
           }}
         >
           6.3 + ký + lưu
-        </button>
+        </button> */}
       </div>
     </div>
   );
