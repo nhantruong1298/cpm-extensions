@@ -5,6 +5,7 @@ import scrollTo from "../actions/scroll_to";
 import clickSignButton from "../actions/click_sign_button";
 import checkQcCode from "../actions/check_qc_code";
 import clickSaveButton from "../actions/click_save_button";
+import openPlan from "../actions/open_plan";
 
 const Popup = () => {
   //* Get TabId
@@ -68,13 +69,22 @@ const Popup = () => {
     });
   };
 
+  const clickOpenPlan = async () => {
+    const tab = await getCurrentTab();
+
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: openPlan,
+    });
+  };
+
   return (
     <div className="popup-container">
       <div className="common-case-container">
         <span className="common-label">Dự án DC</span>
         <button
           className="check-code-btn"
-          style={{ marginBottom: "48px" }}
+          style={{ marginBottom: "32px" }}
           onClick={async () => {
             await handleClickSignButton();
             await handleScrollTo("plan_confirm");
@@ -126,6 +136,16 @@ const Popup = () => {
         <button
           className="check-code-btn"
           onClick={async () => {
+            await handleCheckCodeAndSign("3.2");
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          3.2 (Sai hoặc thiếu tt BB)
+        </button>
+
+        <button
+          className="check-code-btn"
+          onClick={async () => {
             await handleCheckCodeAndSign("4.2");
             await handleScrollTo("plan_confirm");
           }}
@@ -141,6 +161,26 @@ const Popup = () => {
           }}
         >
           4.3 (Sai POSM)
+        </button>
+
+        <button
+          className="check-code-btn"
+          onClick={async () => {
+            await handleCheckCodeAndSign("6.3");
+            await handleScrollTo("plan_confirm");
+          }}
+        >
+          6.3 (Khác)
+        </button>
+
+        <button
+          className="check-code-btn"
+          style={{ marginBottom: "32px" }}
+          onClick={async () => {
+            await clickOpenPlan();
+          }}
+        >
+          Mở plan chưa ký
         </button>
 
         {/* <button

@@ -33,10 +33,10 @@ module.exports = {
         { from: path.resolve("./src/manifest.json"), to: path.resolve("dist") },
         { from: path.resolve("./src/images"), to: path.resolve("dist") },
         { from: path.resolve("./src/background.js"), to: path.resolve("dist") },
-        {
-          from: path.resolve("./src/actions/sign-in.js"),
-          to: path.resolve("dist"),
-        },
+        // {
+          // from: path.resolve("./src/actions/sign-in.js"),
+          // to: path.resolve("dist"),
+        // },
         { from: path.resolve("./src/popup.html"), to: path.resolve("dist") },
         // { from: path.resolve("./src/actions/fill_note.jsx"), to: path.resolve("dist") },
         // { from: path.resolve("./src/actions/scroll_to_plan.jsx"), to: path.resolve("dist") },
